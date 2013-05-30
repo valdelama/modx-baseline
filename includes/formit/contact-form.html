@@ -1,0 +1,73 @@
+<!-- This form assumes that:
+- You are running a multi language site with each language in it's own folder and using the included languageConfig snippet. If you are not using the languageConfig snippet then just replace all the [[+translate.foo]] placeholders with the actual values you would use there. 
+- You are using the included forms.css from github.com/valdelama otherwise you might want to change the markup structure
+-->
+
+<div id="contact-form">
+	[[!FormIt?
+		&hooks=`spam,email`
+		&emailTpl=`contact-form-report`
+		&emailTo=`email@domain.com`
+		&validate=`name:required,email:email:required,message:stripTags,workemail:blank`
+		&emailFromName=`[[+name]]`
+		&emailSubject=`New contact from your website`
+		&successMessage=`[[+translate.formSuccess]]`
+		&vTextRequired=`[[+translate.vTextRequired]]`
+		&vTextEmailInvalid=`[[+translate.vTextEmailInvalid]]`
+	]]
+
+
+	<!-- If there is an error this will make the window scroll down
+	to the contact form (in case it's low down on the page) -->
+	[[!+fi.validation_error:!empty=`
+		<script>
+			window.location.hash = 'contact-form';
+		</script>
+	`]]
+	
+	[[!+fi.successMessage:!empty=`
+		<div class="form-success">
+			[[+fi.formSuccess]]
+		</div>
+	`]]
+
+	<form action="[[~[[*id]]]]" method="post" class="form-horizontal message-below">
+
+		<!-- Gives you some useful values to be able to send in your form report -->
+		<input type="hidden" value="[[*pagetitle]]" name="pagetitle">
+		<input type="hidden" value="[[*id]]" name="id">		
+		<input type="hidden" name="lang" value="[[getResourceField? &id=`[[UltimateParent]]` &field=`pagetitle`]]">
+			
+		<!-- anti spam field, must be left blank but spambots will fill it out -->
+		<input type="hidden" name="workemail" value="">
+
+
+		<!-- if the field throws up an error then the class error is added to the <label> -->
+		<label class="required[[!+fi.error.name:notempty=` error`]]">
+			<div>[[+translate.name]]</div>
+			<input type="text" tabindex="1" name="name" value="[[+fi.name]]">
+			[[!+fi.error.name:notempty=`<span class="message">[[!+fi.error.name]]</span>`]]
+		</label>
+
+		<label class="required[[!+fi.error.email:notempty=` error`]]">
+			<div>[[+translate.email]]</div>
+			<input type="email" tabindex="1" name="email" value="[[+fi.email]]">
+			[[!+fi.error.email:notempty=`<span class="message">[[!+fi.error.email]]</span>`]]
+		</label>
+
+		<label>
+			<div>[[+translate.message]]</div>
+			<textarea tabindex="1" name="message">[[+fi.message]]</textarea>
+		</label>
+
+		<div class="label-group">
+			<div>&nbsp;</div>
+			<label>
+				<input tabindex="1"  type="checkbox" name="subscribe" checked="checked" value="1"> [[+translate.subscribe]]
+			</label>
+		</div>
+
+		<button type="submit" class="button">[[+translate.send]]</button>
+
+	</form>
+</div>

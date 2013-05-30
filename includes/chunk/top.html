@@ -1,0 +1,51 @@
+[[languageConfig]]
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>[[++site_name]] - [[*pagetitle]]</title>
+		<meta name="description" content="[[*description]]">
+
+		<!-- OG data
+		Incude the og:data if you want to have a facebook
+		like button on each page. Don't forget to add an
+		image url and the FB admin id -->
+		<meta property="og:title" content="[[*pagetitle]]">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="">
+		<meta property="og:url" content="[[++site_url]][[*alias]]">
+		<meta property="og:site_name" content="[[++site_name]]">
+		<meta property="og:description" content="[[*description]]">
+		<meta property="fb:admins" content="">
+
+        <!-- Important for responsive sites-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+		<!-- put your IE hacks here -->
+		<!--[if lte IE 9]>
+        <link rel="stylesheet" href="static/css/ie.css" type="text/css" media="screen">
+        <![endif]-->
+		                
+		<!-- Downloaded from http://necolas.github.io/normalize.css -->
+		<link rel="stylesheet" href="static/css/normalize.css" type="text/css" media="screen">
+			
+		<!-- Normally I just use the table styles -->
+		<link rel="stylesheet" href="static/css/bootstrap.css" type="text/css" media="screen">
+			
+		<!-- Include this if you want to use fancybox with gallery.
+		Snippet calls and chunks are included to get you started.
+		Good for responsive gallery in a modal window -->
+		<link rel="stylesheet" href="static/css/fancybox/jquery.fancybox.css" type="text/css" media="screen">
+			
+		<!-- Cross browser form styling with minimal markup from
+		https://github.com/valdelama/mosto -->
+		<link rel="stylesheet" href="static/css/forms.css" type="text/css" media="screen">
+		
+		<!-- Site specific styles -->
+        <link rel="stylesheet" href="static/css/styles.css" type="text/css" media="screen">
+				
+
+    </head>
+
+    <!-- Use micro formats to enrich your search results, more info here http://schema.org -->
+	<body itemscope itemtype="http://schema.org/LocalBusiness" class="[[*bodyClass]]">		

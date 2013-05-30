@@ -1,0 +1,51 @@
+WAYFINDER: http://rtfm.modx.com/display/ADDON/Wayfinder
+---------------------------------------------------------
+
+Sample call for my "global menu" ie. a menu that is displayed on every page, not a context specific menu. This menu assumes you have your pages inside a language folder eg. "en", if you have only 1 language just replace &startId with 0. The various templates that are being called structure the menu as per bootstrap dropdowns, just go in and edit the templates if you need a different structure.
+
+[[!Wayfinder?
+	&startId=`[[UltimateParent? &topLevel=`1`]]`
+	&level=`2`
+	&hereClass=`active`			
+	&outerTpl=`@FILE:includes/wayfinder/global-outer.html` 
+	&innerTpl=`@FILE:includes/wayfinder/global-inner.html` 
+	&parentRowTpl=`@FILE:includes/wayfinder/global-parent-row.html`
+	&activeParentRowTpl=`@FILE:includes/wayfinder/global-parent-row_active.html`
+]]
+
+
+
+
+GETRESOURCES: http://rtfm.modx.com/display/ADDON/getResources
+---------------------------------------------------------------
+
+Sample getresources call including template variables, ordered by menu order, see includes/getresources/item.html for somem template settings.
+
+[[getResources?
+	&elementClass=`modSnippet`
+	&element=`getResources`
+	&tpl=`@FILE item.html`
+	&tplPath=`includes/getresources/`
+	&includeContent=`1`
+	&includeTVs=`1`
+	&processTVs=`1`
+	&sortby=`menuindex`
+	&sortdir=`ASC`
+	&parents=`1`
+]]
+
+
+
+GALLERY: http://rtfm.modx.com/display/ADDON/Gallery
+-----------------------------------------------------
+
+Displays whichever gallery is specified by the gallery ID [[*galleryID]] and displays it using fancybox, sets max height/width values. If you prefer to use tags then you can set up a new tv for that and use: &tag=`[[*galleryTag]]` where your new tv is called galleryTag.
+
+[[!Gallery? &thumbWidth=`120` &thumbTpl=`fancybox-thumbs` &toPlaceholder=`gallery` &album=`[[*galleryID]]` &imageWidth=`940` &imageHeight=`640`]]
+
+[[!+gallery:notempty=`
+	<ul class="gallery-thumbs">
+		[[+gallery]]
+	</ul>
+	<p>[[+gallery.description]]</p>
+`]]
